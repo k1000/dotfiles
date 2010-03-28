@@ -1,0 +1,29 @@
+#!/bin/sh
+# start the ssh connection and the TSE profile
+
+# run firefox after 10 seconds, and save it's pid
+# we time it out to have time to set up the ssh connection
+(
+sleep 10
+firefox --no-remote -P TSE
+# find the pid of the ssh connection
+PIDS=`pidof "ssh"`
+PID=1000000
+for pid in $PIDS
+do
+    # if the pid is just higher than the actual script's pid, then save it
+    if [ "$PID" -gt "$pid" -a "$$" -lt "$pid" ]
+    then
+	PID=$pid
+    fi
+done
+kill $PID
+sleep 1
+kill $$
+) &
+
+#set up the ssh connection
+ssh -D 8080 -L 3389:heracles.univ-tlse1.fr:3389 -l nagy zeus.univ-tlse1.fr
+
+echo #start a new line, because killing looks ugly at the end
+exit 0
