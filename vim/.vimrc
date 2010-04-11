@@ -10,7 +10,7 @@ set incsearch " do incremental search
 "set ruler " show the cursor position all the time
 set visualbell t_vb= " turn off error beep/flash
 set novisualbell " turn off visual bell
-set nobackup " do not keep a
+"set nobackup " do not keep a
 set ch=2     " Make command line two lines highbackup file
 set textwidth=78
 syntax enable
@@ -63,8 +63,8 @@ map <F4> :TlistToggle<CR>
 
 " --------------- TABS --------------------
 " show visible tab characters so we can see what we're doing
-set list
-set listchars=tab:\  \  
+"set list
+"set listchars=tab:  
 
 " lock it down to 4 characters (your preference)
 set ts=4 sw=4
