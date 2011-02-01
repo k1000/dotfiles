@@ -26,12 +26,26 @@ complete -cf sudo
 alias l="ls -l"
 alias ..='cd ..'
 alias ...='cd ../..'
-alias runserver='/usr/bin/python manage.py runserver'
-alias runshell='/usr/bin/python manage.py shell'
+alias runserver='./manage.py runserver'
+alias runshell='./manage.py shell'
 alias g='grep'
 alias s='sudo'
 alias mkdir='mkdir -p'
 alias rmall='rm -rf'
+
+#git alias
+alias gsh="git stash"
+alias gst="git status"
+alias gdf="git diff"
+alias glo="git log"
+alias gps="git push"
+alias gpl="git pull"
+alias gco="git checkout"
+alias gci="git commit"
+alias gad="git add"
+alias grm="git rm"
+alias gtg="git tag"
+alias gbr="git branch"
 
 extract () 
 {
@@ -65,6 +79,26 @@ lsnew()
 pman()
 {
    man -t "${1}" | open -f -a /Applications/Preview.app
+}
+
+crypten(){
+	FNAME=$1
+	if [[ -z "$FNAME" ]]; then
+		echo "crypten <name of file>"
+			echo "  - crypten is a script to encrypt files using des3"
+			exit;
+	fi
+	openssl des3 -salt -in "$FNAME" -out "$FNAME.des3"
+}
+
+cryptde(){
+	FNAME=$1
+	if [[ -z "$FNAME" ]]; then
+		echo "cryptde <name of file>"
+		echo "  - cryptde is a script to decrypt des3 encrypted files"
+		exit;
+	fi
+	openssl des3 -d -salt -in "$FNAME" #-out "${FNAME%.[^.]*}"
 }
 
 LS_COLORS='no=00:fi=00:di=01;32:ln=01;33:pi=40;32:so=01;32:do=01;32:bd=40;33;01:cd=40;33;01:or=40;32;01:ex=01;30:*.tar=00:*.tgz=00:*.arj=00:*.taz=00:*.lzh=00:*.zip=00:*.z=00:*.Z=00:*.gz=00:*.bz2=00:*.deb=01;32:*.rpm=01;32:*.jpg=00;32:*.gif=00;32:*.bmp=00;32:*.ppm=00;32:*.tga=00;32:*.xbm=00;32:*.xpm=00;32:*.tif=00;32:*.png=00;32:*.mov=00;32:*.mpg=00;32:*.ogm=00;32:*.avi=00;32:*.fli=00;32:*.gl=01;32:*.dl=01;32:'; export LS_COLORS
